@@ -1,0 +1,2 @@
+n_sae_corpus,n_labelled,n_folded,collapse_rate,layers,k_values,max_tok_per_seq,d_latent,sae_topk,n_repeats,mean_sae_minus_raw,entropy_auc,used_uniprot_fallback
+6000,800,800,0.5025,"[12, 30]","[3, 20, 64]",48,5120,32,10,-0.1170451136278407,0.5557451436285907,False

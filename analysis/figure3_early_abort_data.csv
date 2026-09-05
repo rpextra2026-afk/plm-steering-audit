@@ -1,0 +1,13 @@
+model,residues,auc,auc_min,auc_max,retention_30_over_full,signal_real,best_layer,source
+ProtGPT2,10,0.682,0.606,0.734,,,30,locked-results 3g
+ProtGPT2,20,0.720,0.637,0.767,,,30,locked-results 3g
+ProtGPT2,30,0.740,0.661,0.784,,,30,locked-results 3g
+ProtGPT2,full,0.780,0.709,0.835,0.949,yes,30,locked-results 3g
+ZymCTRL,10,0.597,,,,,30,locked-results 3j
+ZymCTRL,20,0.643,,,,,30,locked-results 3j
+ZymCTRL,30,0.646,,,,,30,locked-results 3j
+ZymCTRL,full,0.658,,,0.981,yes,30,locked-results 3j
+RITA-small,10,0.503,,,,,6,locked-results 3j
+RITA-small,20,0.496,,,,,6,locked-results 3j
+RITA-small,30,0.495,,,,,6,locked-results 3j
+RITA-small,full,0.506,,,0.977,no_at_chance,6,locked-results 3j

@@ -1,0 +1,2 @@
+model,anchor_alpha_rel,target_len,natural_len_this_run,layer_early,layer_late,h_early,h_late,raw_v_early,raw_v_late,matched_norm_early,matched_norm_late,pool_collapse_rate,pool_mean_plddt,utility_gap,repetition_separation,supports_min_new_tokens,used_uniprot_fallback
+progen2,0.20000473771072358,40,29.2,3,11,35.322433376312254,64.7621376991272,3.015972375869751,5.8944525718688965,7.064654022733841,12.952734364099697,0.79,53.92878378927708,0.02274666936136782,0.04515607555972179,True,False

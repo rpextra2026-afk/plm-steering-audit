@@ -1,0 +1,2 @@
+n_pool,pool_collapse_rate,full_length_auc,best_short_truncation,best_short_auc,auc_retained_fraction,subclin_p_realized,subclin_p_predicted_prob,zym_transfer_auc,zym_pool_collapse_rate
+250,0.564,0.7796055796055794,30,0.7401635401635401,0.9494076999012835,0.12591804226334372,0.15377915887395915,0.40923124421117624,0.6583333333333333
