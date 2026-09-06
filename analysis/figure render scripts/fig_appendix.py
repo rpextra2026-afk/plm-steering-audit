@@ -91,7 +91,7 @@ ax.legend(fontsize=5.8, loc="upper left", frameon=False)
 ax.text(-0.30, 0.604,
         "layer 30  |  matched budget and classifier  |  in-fold selection",
         ha="left", va="bottom", fontsize=5.2, color=GREY)
-ax.set_title("A2  sparse features underperform raw,\nat every budget tested",
+ax.set_title("sparse features underperform raw,\nat every budget tested",
              fontsize=7.4, color=DARK, pad=6, linespacing=1.4)
 finish(fig, [ax], "figA2_sae_vs_raw.pdf")
 
@@ -132,7 +132,7 @@ ax.set_xlabel("minimum measured stability gap within a pair", fontsize=7.2)
 ax.set_ylabel("balanced accuracy (%)", fontsize=7.2)
 ax.tick_params(axis="y", labelsize=6.2)
 ax.legend(fontsize=5.8, loc="upper left", frameon=False)
-ax.set_title("A3  coarse differences are seen, fine ones missed\n"
+ax.set_title("coarse differences are seen, fine ones missed\n"
              "(underpowered: no level clears chance alone)",
              fontsize=7.2, color=DARK, pad=6, linespacing=1.4)
 finish(fig, [ax], "figA3_gap_sweep.pdf")
@@ -176,7 +176,7 @@ ax.text(19.5, 51.9,
         "paired +5.21 pLDDT short-vs-long\n"
         "Wilcoxon $p$ = 0.0162  |  32/50 higher when truncated",
         ha="left", va="bottom", fontsize=5.2, color=DARK, linespacing=1.5)
-ax.set_title("A4  shorter sequences score higher\non the same metric",
+ax.set_title("shorter sequences score higher\non the same metric",
              fontsize=7.4, color=DARK, pad=6, linespacing=1.4)
 finish(fig, [ax], "figA4_truncation.pdf")
 
@@ -233,8 +233,8 @@ ax.scatter([], [], s=26, facecolor="white", edgecolor=DARK, label="late layer")
 ax.legend(fontsize=5.6, loc="upper left", frameon=False, scatterpoints=1,
           handletextpad=0.4, borderpad=0.2)
 
-ax.set_title("A5  every model over-pushed its early layer\n"
-             "(median 1.82x) - a dose confound, not a depth effect",
+ax.set_title("every model receives more relative push early\n"
+             "(median 1.82x), so matched push scales per layer",
              fontsize=7.0, color=DARK, pad=6, linespacing=1.4)
 finish(fig, [ax], "figA5_layer_asymmetry.pdf")
 

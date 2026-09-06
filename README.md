@@ -28,6 +28,11 @@ We introduce no new method. The contribution is the audit.
 Every notebook is numbered by the order it was run. Numbers in the paper trace to the
 output cells of the notebooks listed below.
 
+**Two notebooks share the number 50** — the Rocklin external check
+(`50-rocklin-...-EXECUTED`) and the ZymCTRL layer-matched run
+(`50-ai4dd-zymctrl-layer-matched-alpha-rel`). They are unrelated experiments; cite them
+by filename, not by number.
+
 ---
 
 ## Which notebook produced which result
@@ -44,6 +49,27 @@ output cells of the notebooks listed below.
 | `39-ai4dd-orthogonalized-foldability-and-refold-fix` | attempt 2 (orthogonalized, cosine -0.0000), and the orthogonal-2x refold |
 | `43-ai4dd-pep-alpha-mapping` | norm-ratio mapping of the published method onto our dose axis |
 | `58-ai4dd-piggen-convention-and-vector-stability` | split-half reproducibility of the steering direction |
+
+### Matched relative push — cross-model and cross-layer
+
+A fixed injected norm means a different *relative* push in every model, so any comparison
+that spans layers or models rescales the vector to a common
+`alpha_rel = ||v_inject|| / ||h||`, measured at each injection site. These runs anchor
+every condition at `alpha_rel = 0.200`, the value ProtGPT2 layer 12 receives at nominal
+"1x". The calibration CSV each one writes carries that layer's own `||h||` and the norm
+required to hold the anchor.
+
+| Notebook | Result |
+|---|---|
+| `38-ai4dd-zymctrl-matched-alpha-rel` | ZymCTRL re-tested at ProtGPT2's own relative push; flat at 1x and 2x |
+| `40-ai4dd-zymctrl-alpha-rel-threshold-search` | the ladder extended to 3x/4x; first significant dose at alpha_rel 0.60 |
+| `41-ai4dd-piggen-layer-matched-alpha-rel` | p-IgGen, both layers, matched |
+| `47-ai4dd-rita-matched-alpha-rel` | RITA, matched |
+| `49-ai4dd-protgpt2-layer-matched-alpha-rel` | ProtGPT2, layers 12 and 30, matched per layer |
+| `50-ai4dd-zymctrl-layer-matched-alpha-rel` | ZymCTRL, layers 12 and 30, matched per layer |
+| `51-ai4dd-rita-layer-matched-alpha-rel` | RITA, layers 3 and 11, matched per layer |
+| `52-ai4dd-mistralprot-layer-matched-alpha-rel` | Mistral-Prot, layers 2 and 7, matched per layer |
+| `53-ai4dd-progen2-layer-matched-alpha-rel` | ProGen2, layers 3 and 11, matched per layer |
 
 ### Prediction arm
 
@@ -80,34 +106,49 @@ output cells of the notebooks listed below.
 These are self-contained matplotlib transcriptions of values already in the saved
 artifacts. They need no GPU.
 
-The structure panel is rendered separately from `analysis/fig1/`.
+The structure panel is rendered separately from `analysis/fig1/`, which needs PyMOL and
+the two `.pdb` files it contains. Both panels share one camera view and one pLDDT colour
+range; the stitching script asserts the two rendered panels are the same pixel size,
+which is the tripwire against scale drift.
+
+The pipeline diagram in the paper is hand-drawn, not a script output.
+
+**Figure filenames do not match the figure numbers in the paper.** The numbering changed
+during drafting and the filenames were deliberately left alone so that saved artifacts
+keep stable names. Match figures by content, not by number.
 
 ---
 
 ## Notes
 
 **One large artifact is omitted.** The per-sequence activation tensor from the
-design-vs-scramble experiment (~82 MB) is not included. Re-running notebook 50
-regenerates it. All derived results — predictions, per-pair outcomes, summary
-statistics — are in `analysis/`.
+design-vs-scramble experiment (~82 MB) is not included. Re-running
+`50-rocklin-...-EXECUTED` regenerates it. All derived results — predictions, per-pair
+outcomes, summary statistics — are in `analysis/`.
 
-**Controls are not interchangeable.** Three unsteered N=50 control arms appear across
-these experiments, at 52.0%, 62.0% and 64.0%. They come from different runs and the
-spread is consistent with binomial noise at that sample size. Every steering condition
-is compared only with the control from its own run. The larger N=400 natural-collapse
-estimate is 53.2%.
+**Controls are not interchangeable.** Three unsteered N=50 ProtGPT2 control arms appear
+across these experiments, at 52.0%, 62.0% and 64.0%. They come from different runs and
+are reported separately rather than pooled. Every steering condition is compared only
+with the control from its own run. The larger N=400 natural-collapse estimate is 53.2%,
+and the matched-push runs carry their own controls again.
 
 **Several AUC values are close in magnitude and are not comparable.** They come from
 different pools and evaluation schemes: repeated stratified splits at N=1200 and N=400,
 out-of-fold predictions for risk-coverage, a separate early-abort pool, and a smaller
 compute pool. The paper states which is which at each use.
 
-**Two claims were withdrawn during this work.** A sparse-autoencoder comparison was
-retracted once we found the dictionary had been trained on too few sequences to support
-it; an early-versus-late layer sensitivity claim was retracted once we found every model
-had been over-pushed at its early layer, a dose confound rather than a depth effect.
-Notebooks from the superseded analyses are retained for provenance and are not cited in
-the paper.
+**Matched relative push makes conditions comparable, not responses equivalent.** Holding
+`alpha_rel` constant across models does not hold the effect constant: ProtGPT2 reaches
+90% collapse at alpha_rel 0.400 while ZymCTRL requires 22.8. It is the correct unit for
+comparison, not a cross-model predictor of collapse, and no cross-model dose-response
+curve is fitted to these points.
+
+**Some notebooks here are superseded and are not cited in the paper.** An early
+sparse-autoencoder comparison used a dictionary trained on too few sequences to support
+the comparison, and early-layer steering runs were over-pushed relative to their late
+layers, which is a dose confound rather than a depth effect. Both were redone — the
+sparse comparison in `61`, the layer question in `49`–`53` — and the superseded runs are
+retained for provenance.
 
 **Hardware.** All GPU work ran on a single Tesla T4. Absolute timings are
 hardware-specific; the ratios are the transferable quantities.
